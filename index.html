@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *
+        {
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman';
+            margin: 0px;
+            padding: 0px;
+        }
+        .outer-card {
+            position: fixed;
+            top: 150px;
+            left: 50%;
+            background: linear-gradient(135deg, #FFB6C1, #FFEC8B);
+            transform: translateX(-50%);
+            height: auto;
+            width: 30%;
+            border-radius: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            box-shadow: 0px 0px 5px 1px rgb(0, 0, 0);
+            animation: moves 2s 1;
+        
+        }
+        .search-box {
+            width: 100%;
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            height: 30px;
+            padding: 5px;
+            border: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+        }
+        input[type="text"]:focus
+        {
+            outline: none;
+        }
+        button {
+            height: 30px;
+            width: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .fa-magnifying-glass {
+            margin-top: 8px;
+            font-size: 2em;
+        }
+
+        .weather {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .weather img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .weather h2 {
+            margin-top: 0;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            font-size: 1.2em;
+            align-items: center;
+        }
+
+        .humidity, .windspeed {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .weather, .details {
+            display: none;
+        }
+
+        .outer-card {
+            height: auto;
+        }
+
+        #temperature {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .detail-icon {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        @keyframes moves
+         {
+            from{transform: translateX(100%);}
+         }
+         video
+         {
+            object-fit: cover;
+            position: fixed;
+            height: 100%;
+            width: 100%;
+         }
+         .fa-magnifying-glass:hover {
+                 color: black; 
+            filter: drop-shadow(0px 0px 2px rgb(88, 84, 84)); 
+         }
+
+
+    </style>
+</head>
+<body>
+    <video src="c:\Users\DELL\Downloads\6933752-uhd_4096_2160_24fps.mp4" muted autoplay loop></video>
+    <div class="outer-card">
+        <div class="search-box">
+            <input type="text" placeholder="Enter city name">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    <div class="weather" style="display: none;">
+
+            <img src="" alt="Weather Icon">
+            <h3 id="temperature"></h3>
+            <h2></h2>
+        </div>
+        <div class="details ">
+            <div class="humidity">
+                <img src="https://static-00.iconduck.com/assets.00/humidity-icon-2048x1675-xxsge5os.png" alt="Humidity Icon" class="detail-icon">
+                Humidity: <span id="humidity-value"></span>
+            </div>
+            <div class="windspeed ">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTImi1PbfmiN98mCQRRVgXSk-fn0BMVSoL71g&s" alt="Wind Icon" class="detail-icon">
+                Wind Speed: <span id="wind-value"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        const cityInput = document.querySelector('input[type="text"]');
+        const searchButton = document.querySelector('button');
+        const cityDisplay = document.querySelector('.weather h2');
+        const weatherIcon = document.querySelector('.weather img');
+        const humidityDisplay = document.getElementById('humidity-value');
+        const windDisplay = document.getElementById('wind-value');
+        const temperatureDisplay = document.getElementById('temperature');
+
+        const apiKey = '1cdf4e303419caa3fd4267c15e581a7d'; 
+
+        searchButton.addEventListener('click', () => {
+            const cityName = cityInput.value;
+            getWeather(cityName);
+        });
+
+        cityInput.addEventListener('keyup', (event) => {
+            if (event.key === "Enter") {
+                const cityName = cityInput.value;
+                getWeather(cityName);
+            }
+        });
+
+        async function getWeather(city) {
+            try {
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+                const weatherData = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(weatherData.message || 'City not found');
+                }
+
+                cityDisplay.textContent = weatherData.name;
+                weatherIcon.src = `http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
+                humidityDisplay.textContent = `${weatherData.main.humidity}%`;
+                windDisplay.textContent = `${weatherData.wind.speed} m/s`;
+                temperatureDisplay.textContent = Math.round(`${weatherData.main.temp}`)+`°C`;
+
+                document.querySelector('.weather').style.display = 'flex';
+                document.querySelector('.details').style.display = 'flex';
+
+            } catch (error) {
+                console.error(error);
+                alert("Could not find the city. Please try again.");
+
+
+                document.querySelector('.weather').style.display = 'none';
+                document.querySelector('.details').style.display = 'none';
+                document.querySelector('.loading').style.display = 'none';
+
+            }
+        }
+    </script>
+</body>
+</html>
