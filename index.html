@@ -3,210 +3,493 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        *
-        {
-            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman';
-            margin: 0px;
-            padding: 0px;
-        }
-        .outer-card {
-            position: fixed;
-            top: 150px;
-            left: 50%;
-            background: linear-gradient(135deg, #FFB6C1, #FFEC8B);
-            transform: translateX(-50%);
-            height: auto;
-            width: 30%;
-            border-radius: 20px;
-            padding: 20px;
-            box-sizing: border-box;
-            box-shadow: 0px 0px 5px 1px rgb(0, 0, 0);
-            animation: moves 2s 1;
-        
-        }
-        .search-box {
-            width: 100%;
-            display: flex;
-            margin-bottom: 20px;
-        }
-
-        input[type="text"] {
-            flex-grow: 1;
-            height: 30px;
-            padding: 5px;
-            border: none;
-            font-size: 1.2em;
-            border-radius: 5px;
-        }
-        input[type="text"]:focus
-        {
-            outline: none;
-        }
-        button {
-            height: 30px;
-            width: 30px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            margin-left: 5px;
-        }
-
-        .fa-magnifying-glass {
-            margin-top: 8px;
-            font-size: 2em;
-        }
-
-        .weather {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .weather img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-        }
-
-        .weather h2 {
-            margin-top: 0;
-        }
-
-        .details {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            font-size: 1.2em;
-            align-items: center;
-        }
-
-        .humidity, .windspeed {
-            margin: 5px 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .weather, .details {
-            display: none;
-        }
-
-        .outer-card {
-            height: auto;
-        }
-
-        #temperature {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-
-        .detail-icon {
-            width: 20px;
-            height: 20px;
-            vertical-align: middle;
-            margin-right: 5px;
-        }
-        @keyframes moves
-         {
-            from{transform: translateX(100%);}
-         }
-         video
-         {
-            object-fit: cover;
-            position: fixed;
-            height: 100%;
-            width: 100%;
-         }
-         .fa-magnifying-glass:hover {
-                 color: black; 
-            filter: drop-shadow(0px 0px 2px rgb(88, 84, 84)); 
-         }
-
-
-    </style>
+    <title>Alex Johnson - Full Stack Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <video src="c:\Users\DELL\Downloads\6933752-uhd_4096_2160_24fps.mp4" muted autoplay loop></video>
-    <div class="outer-card">
-        <div class="search-box">
-            <input type="text" placeholder="Enter city name">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
-    <div class="weather" style="display: none;">
-
-            <img src="" alt="Weather Icon">
-            <h3 id="temperature"></h3>
-            <h2></h2>
-        </div>
-        <div class="details ">
-            <div class="humidity">
-                <img src="https://static-00.iconduck.com/assets.00/humidity-icon-2048x1675-xxsge5os.png" alt="Humidity Icon" class="detail-icon">
-                Humidity: <span id="humidity-value"></span>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#hero">AJ</a>
             </div>
-            <div class="windspeed ">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTImi1PbfmiN98mCQRRVgXSk-fn0BMVSoL71g&s" alt="Wind Icon" class="detail-icon">
-                Wind Speed: <span id="wind-value"></span>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#hero" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <script>
-        
-        const cityInput = document.querySelector('input[type="text"]');
-        const searchButton = document.querySelector('button');
-        const cityDisplay = document.querySelector('.weather h2');
-        const weatherIcon = document.querySelector('.weather img');
-        const humidityDisplay = document.getElementById('humidity-value');
-        const windDisplay = document.getElementById('wind-value');
-        const temperatureDisplay = document.getElementById('temperature');
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-background">
+            <div class="hero-particles"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="hero-greeting">Hello, I'm</span>
+                    <span class="hero-name">Alex Johnson</span>
+                </h1>
+                <p class="hero-subtitle">Full Stack Developer & Digital Innovator</p>
+                <p class="hero-description">
+                    Crafting exceptional digital experiences through clean code, 
+                    innovative design, and cutting-edge technology solutions.
+                </p>
+                <div class="hero-cta">
+                    <a href="#portfolio" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-avatar">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" alt="Alex Johnson" />
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
 
-        const apiKey = '1cdf4e303419caa3fd4267c15e581a7d'; 
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Passionate about creating digital solutions that make a difference</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-description">
+                        With over 5 years of experience in full-stack development, I specialize in creating 
+                        scalable web applications using modern technologies. My passion lies in solving 
+                        complex problems and transforming ideas into beautiful, functional digital products.
+                    </p>
+                    <p class="about-description">
+                        When I'm not coding, you'll find me exploring new technologies, contributing to 
+                        open-source projects, or sharing knowledge with the developer community through 
+                        blog posts and tech talks.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Projects Completed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">25+</div>
+                            <div class="stat-label">Happy Clients</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="about-photo">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop&crop=face" alt="Alex Johnson Professional Photo" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        searchButton.addEventListener('click', () => {
-            const cityName = cityInput.value;
-            getWeather(cityName);
-        });
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">A showcase of my recent work and achievements</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="E-commerce Platform" />
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">E-commerce Platform</h3>
+                        <p class="project-description">A full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
 
-        cityInput.addEventListener('keyup', (event) => {
-            if (event.key === "Enter") {
-                const cityName = cityInput.value;
-                getWeather(cityName);
-            }
-        });
+                <div class="project-card" data-category="mobile">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop" alt="Task Management App" />
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Task Management App</h3>
+                        <p class="project-description">A collaborative task management tool with real-time updates</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">TypeScript</span>
+                        </div>
+                    </div>
+                </div>
 
-        async function getWeather(city) {
-            try {
-                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
-                const weatherData = await response.json();
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Analytics Dashboard" />
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Analytics Dashboard</h3>
+                        <p class="project-description">Real-time data visualization dashboard with interactive charts</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">D3.js</span>
+                            <span class="tech-tag">Express</span>
+                        </div>
+                    </div>
+                </div>
 
-                if (!response.ok) {
-                    throw new Error(weatherData.message || 'City not found');
-                }
+                <div class="project-card" data-category="ai">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop" alt="AI Chat Assistant" />
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AI Chat Assistant</h3>
+                        <p class="project-description">Intelligent chatbot with natural language processing capabilities</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">OpenAI</span>
+                            <span class="tech-tag">FastAPI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                cityDisplay.textContent = weatherData.name;
-                weatherIcon.src = `http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
-                humidityDisplay.textContent = `${weatherData.main.humidity}%`;
-                windDisplay.textContent = `${weatherData.wind.speed} m/s`;
-                temperatureDisplay.textContent = Math.round(`${weatherData.main.temp}`)+`°C`;
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Skills & Technologies</h2>
+                <p class="section-subtitle">Tools and technologies I work with</p>
+            </div>
+            <div class="skills-content">
+                <div class="skills-categories">
+                    <div class="skill-category">
+                        <h3 class="category-title">Frontend</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-react"></i></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">React</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="90"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-vuejs"></i></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">Vue.js</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="85"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-js-square"></i></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">JavaScript</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="95"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">CSS3</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="90"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                document.querySelector('.weather').style.display = 'flex';
-                document.querySelector('.details').style.display = 'flex';
+                    <div class="skill-category">
+                        <h3 class="category-title">Backend</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">Node.js</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="88"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-python"></i></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">Python</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="82"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fas fa-database"></i></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">MongoDB</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="80"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fas fa-server"></i></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">PostgreSQL</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="75"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            } catch (error) {
-                console.error(error);
-                alert("Could not find the city. Please try again.");
+                    <div class="skill-category">
+                        <h3 class="category-title">Tools & Others</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">Git</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="92"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-docker"></i></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">Docker</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="78"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fab fa-aws"></i></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">AWS</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="70"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+                                <div class="skill-info">
+                                    <span class="skill-name">React Native</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="85"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What People Say</h2>
+                <p class="section-subtitle">Testimonials from clients and colleagues</p>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial-track" id="testimonial-track">
+                    <div class="testimonial-slide active">
+                        <div class="testimonial-content">
+                            <div class="testimonial-text">
+                                "Alex delivered an exceptional e-commerce platform that exceeded our expectations. 
+                                His attention to detail and technical expertise made the entire process smooth and enjoyable."
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-image">
+                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b1d1?w=80&h=80&fit=crop&crop=face" alt="Sarah Chen" />
+                                </div>
+                                <div class="author-info">
+                                    <div class="author-name">Sarah Chen</div>
+                                    <div class="author-role">CEO, TechStart Inc.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                document.querySelector('.weather').style.display = 'none';
-                document.querySelector('.details').style.display = 'none';
-                document.querySelector('.loading').style.display = 'none';
+                    <div class="testimonial-slide">
+                        <div class="testimonial-content">
+                            <div class="testimonial-text">
+                                "Working with Alex was a game-changer for our project. His full-stack expertise 
+                                and problem-solving skills helped us launch our product ahead of schedule."
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-image">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Michael Rodriguez" />
+                                </div>
+                                <div class="author-info">
+                                    <div class="author-name">Michael Rodriguez</div>
+                                    <div class="author-role">CTO, Innovation Labs</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            }
-        }
-    </script>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-content">
+                            <div class="testimonial-text">
+                                "Alex's code quality and architectural decisions have significantly improved our 
+                                development workflow. He's a true professional and a pleasure to work with."
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-image">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="Emily Watson" />
+                                </div>
+                                <div class="author-info">
+                                    <div class="author-name">Emily Watson</div>
+                                    <div class="author-role">Lead Developer, Digital Agency</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-controls">
+                    <button class="testimonial-btn prev-btn" id="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="testimonial-dots" id="testimonial-dots">
+                        <span class="dot active" data-slide="0"></span>
+                        <span class="dot" data-slide="1"></span>
+                        <span class="dot" data-slide="2"></span>
+                    </div>
+                    <button class="testimonial-btn next-btn" id="next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's discuss your next project</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Work Together</h3>
+                    <p>I'm always interested in new opportunities and exciting projects. 
+                       Whether you need a full-stack developer for your team or want to 
+                       collaborate on a freelance project, let's connect!</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-text">alex@example.com</div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <div class="contact-text">+1 (555) 123-4567</div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-text">San Francisco, CA</div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        <label for="subject">Subject</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2024 Alex Johnson. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#hero">Back to Top</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
